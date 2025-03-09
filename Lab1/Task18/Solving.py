@@ -10,7 +10,7 @@ def cafe_task(day_prices: List[int], coupon_price: int = 100) -> Tuple[int, Tupl
     for price in day_prices:
         dp.append([float("inf")] * len(dp[-1]))
         will_coupon_add = False
-        if price >= coupon_price:
+        if price > coupon_price:
             dp[-1].append(float("inf"))
             will_coupon_add = True
 
@@ -33,7 +33,7 @@ def cafe_task(day_prices: List[int], coupon_price: int = 100) -> Tuple[int, Tupl
     way_point_cur_index = min_cost_col
     free_days = []
     for line in range(len(dp) - 1, 0, -1):
-        was_coupon_add = day_prices[line - 1] >= coupon_price
+        was_coupon_add = day_prices[line - 1] > coupon_price
         if way_point_cur_index + 1 < len(dp[line - 1]) and \
                 dp[line - 1][way_point_cur_index + 1] == dp[line][way_point_cur_index]:
             free_days.append(line)
