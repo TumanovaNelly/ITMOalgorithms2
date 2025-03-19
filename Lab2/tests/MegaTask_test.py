@@ -39,6 +39,15 @@ class TestRope(unittest.TestCase):
         self.string.build("abcde")
         self.string.cut_n_paste((0, 4), 0)
         self.assertEqual(str(self.string), "abcde")
+        self.assertRaises(IndexError, self.string.cut_n_paste, (0, 4), 1)
+
+    def test_index_error(self):
+        self.string.build("abcde")
+        self.assertRaises(IndexError, self.string.cut_n_paste, (1, 2), 4)
+        self.assertRaises(IndexError, self.string.cut_n_paste, (1, 2), -1)
+        self.assertRaises(IndexError, self.string.cut_n_paste, (-1, 2), 1)
+        self.assertRaises(IndexError, self.string.cut_n_paste, (1, -2), 1)
+        self.assertRaises(IndexError, self.string.cut_n_paste, (2, 1), 1)
 
 
 if __name__ == "__main__":

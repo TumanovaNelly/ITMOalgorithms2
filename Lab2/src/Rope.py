@@ -44,9 +44,11 @@ class Rope:
 
     def __paste(self, start: int, node: Node) -> Node:
         """ Вставка поддерева в дерево """
-        if self.__root is None and start == 0:
-            self.__root = node
-            return node
+        if self.__root is None:
+            if start == 0:
+                self.__root = node
+                return node
+            else: raise IndexError("Index out of range")
 
         left_part, right_part = self.__split(self.__root, start)
         return self.__merge(self.__merge(left_part, node), right_part)
@@ -67,9 +69,11 @@ class Rope:
         while cur_index != index:
             if cur_index > index:
                 cur_node = cur_node.left
+                if cur_node is None: raise IndexError("Index out of range")
                 cur_index -= (cur_node.right.size if cur_node.right is not None else 0) + 1
             elif cur_index < index:
                 cur_node = cur_node.right
+                if cur_node is None: raise IndexError("Index out of range")
                 cur_index += (cur_node.left.size if cur_node.left is not None else 0) + 1
 
         self.__splay(cur_node)
