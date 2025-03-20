@@ -8,7 +8,7 @@ class Rope:
     def __init__(self, root: Node = None):
         self.__root = root
 
-    def build(self, word: str):  #### Поменять первоначальное дерево
+    def build(self, word: str):
         """ Построение дерева """
         self.__root = self.__build_recursive(word, 0, len(word))
 
@@ -20,6 +20,9 @@ class Rope:
         result = []
         self.__to_string(self.__root, result)
         return ''.join(result)
+
+    def __getitem__(self, index: int):
+        return self.__getitem(self.__root, index).value
 
     # ___________ приватные методы __________ #
     def __build_recursive(self, word: str, start: int, end: int) -> Optional[Node]:
@@ -59,9 +62,6 @@ class Rope:
         left_part, mid_part = self.__split(other, start)
         self.__root = self.__merge(left_part, right_part)
         return mid_part
-
-    def __getitem__(self, index: int):
-        return self.__getitem(self.__root, index).value
 
     def __getitem(self, node: Node, index: int) -> Node:
         cur_node = node

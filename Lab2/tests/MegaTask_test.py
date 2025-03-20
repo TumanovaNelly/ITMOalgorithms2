@@ -30,6 +30,16 @@ class TestRope(unittest.TestCase):
         self.string.cut_n_paste((1, 3), 0)
         self.assertEqual(str(self.string), "bcdae")
 
+    def test_getitem(self):
+        self.string.build("abcde")
+        self.assertEqual(self.string[0], 'a')
+        self.assertEqual(self.string[0], 'a')
+        self.assertEqual(self.string[4], 'e')
+        self.string.cut_n_paste((1, 3), 0)
+        self.assertEqual(self.string[0], 'b')
+        self.assertEqual(self.string[0], 'b')
+        self.assertEqual(self.string[4], 'e')
+
     def test_paste_to_end(self):
         self.string.build("abcde")
         self.string.cut_n_paste((1, 3), 2)
