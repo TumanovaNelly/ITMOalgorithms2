@@ -60,10 +60,10 @@ class Rope:
         self.__root = self.__merge(left_part, right_part)
         return mid_part
 
-    def __split(self, node: Node, index: int) -> Tuple[Optional[Node], Optional[Node]]:
-        """ Разбитие поддерева на поддеревья """
-        if index == node.size: return node, None
+    def __getitem__(self, index: int):
+        return self.__getitem(self.__root, index).value
 
+    def __getitem(self, node: Node, index: int) -> Node:
         cur_node = node
         cur_index = cur_node.left.size if cur_node.left else 0
         while cur_index != index:
@@ -77,6 +77,14 @@ class Rope:
                 cur_index += (cur_node.left.size if cur_node.left is not None else 0) + 1
 
         self.__splay(cur_node)
+        return cur_node
+
+    def __split(self, node: Node, index: int) -> Tuple[Optional[Node], Optional[Node]]:
+        """ Разбитие поддерева на поддеревья """
+        if index == node.size: return node, None
+
+        cur_node = self.__getitem(node, index)
+
         left_part = cur_node.left
         cur_node.left = None
         if left_part is not None: left_part.parent = None
