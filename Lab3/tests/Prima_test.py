@@ -16,7 +16,7 @@ class TestGetMstLens(unittest.TestCase):
 
     def test_points_on_line(self):
         points = [(0, 0), (1, 1), (2, 2), (3, 3)]
-        expected_result = [2, 2, 2]  # Длины рёбер в MST
+        expected_result = [2, 2, 2]
         self.assertEqual(get_mst_lens(points), expected_result)
 
 
