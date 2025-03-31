@@ -6,6 +6,10 @@ def get_norm(point0: Tuple[int, int], point1: Tuple[int, int]) -> int:
 
 
 def get_mst_lens(points: List[Tuple[int, int]]) -> List[int]:
+    """
+    :param points: Координаты точек
+    :return: Нормы ребер MST
+    """
     mst_edges_lens: List[int] = []
 
     min_norms_to_current_mst: List[Union[float('inf'), None, int]] = [float('inf')] * len(points)
@@ -16,12 +20,12 @@ def get_mst_lens(points: List[Tuple[int, int]]) -> List[int]:
         min_edge_norma = float('inf')
         min_edge_vertex = None
         for i in range(len(min_norms_to_current_mst)):
-            if min_norms_to_current_mst[i] is None: continue # если вершина уже в mst
+            if min_norms_to_current_mst[i] is None: continue # если вершина уже в MST
 
-            # обновляем минимальные расстояния до mst
+            # обновляем минимальные расстояния до MST
             min_norms_to_current_mst[i] = min(min_norms_to_current_mst[i], get_norm(points[i], points[last_vertex]))
 
-            # обновляем минимум расстояний до mst
+            # обновляем минимум расстояний до MST
             if min_edge_norma > min_norms_to_current_mst[i]:
                 min_edge_norma = min_norms_to_current_mst[i]
                 min_edge_vertex = i

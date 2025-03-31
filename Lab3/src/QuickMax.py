@@ -17,6 +17,14 @@ def partition(lst: List[int], start: int, end: int, pivot: int) -> Tuple[int, in
 
 
 def quick_max(lst: List[int], number: int, start: int = 0, end: int = -1) -> int:
+    """
+    !!!!!!!! Меняет начальный lst !!!!!!!!
+    :param lst: Список, на части которого ищем K-ый максимум
+    :param number: K
+    :param start: Индекс начала подсписка, где ищем K-ый максимум
+    :param end: Индекс конца подсписка, где ищем K-ый максимум
+    :return: K-ый максимум в списке (индексирование с начала списка, не со start'ого индекса)
+    """
     if end == -1: end = len(lst)
     if end - start < 1: return lst[number]
 
